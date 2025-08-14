@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherBar_WPF", "WeatherBar_WPF\WeatherBar_WPF.csproj", "{51E654AF-D61B-47BD-AD10-527AAC3551F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherIconGenerator", "WeatherIconGenerator\WeatherIconGenerator.csproj", "{437DFFCB-AC7A-4203-B4A7-E7830D12D527}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{3878FE38-899B-4297-9656-F8624F02091B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51E654AF-D61B-47BD-AD10-527AAC3551F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51E654AF-D61B-47BD-AD10-527AAC3551F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51E654AF-D61B-47BD-AD10-527AAC3551F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51E654AF-D61B-47BD-AD10-527AAC3551F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437DFFCB-AC7A-4203-B4A7-E7830D12D527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437DFFCB-AC7A-4203-B4A7-E7830D12D527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437DFFCB-AC7A-4203-B4A7-E7830D12D527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437DFFCB-AC7A-4203-B4A7-E7830D12D527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3878FE38-899B-4297-9656-F8624F02091B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3878FE38-899B-4297-9656-F8624F02091B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3878FE38-899B-4297-9656-F8624F02091B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3878FE38-899B-4297-9656-F8624F02091B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8EF2ED46-E0C4-4F87-A3E7-9B8935F07359}
+	EndGlobalSection
+EndGlobal
