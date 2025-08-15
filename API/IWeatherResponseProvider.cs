@@ -1,6 +1,6 @@
 ﻿namespace API;
 
-internal interface IWeatherResponseProvider
+public interface IWeatherResponseProvider
 {
     Task<WeatherResponse?> TryGetWeatherResponse(double latitude, double longitude);
 }

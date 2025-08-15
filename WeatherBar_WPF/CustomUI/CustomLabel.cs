@@ -1,10 +1,10 @@
-﻿using System.CodeDom;
-using System.Text;
+﻿using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 
-namespace WeatherBar_WPF;
+namespace WeatherBar_WPF.CustomUI;
 
-internal class DataLabel : Label
+internal class CustomLabel : Label
 {
     private string _data;
     private readonly string? _prefix;
@@ -12,13 +12,18 @@ internal class DataLabel : Label
 
     private readonly StringBuilder _contentBuilder;
 
+    private readonly TextBlock _textBlock;
+
     public string Data { get => _data; set => ChangeData(value); }
 
-    public DataLabel(string data, string? prefix, string? postfix) : base()
+    public CustomLabel(string data, string? prefix, string? postfix) : base()
     {
         _prefix = prefix;
         _postfix = postfix;
         _contentBuilder = new StringBuilder();
+
+        _textBlock = new TextBlock() { TextWrapping = TextWrapping.Wrap};
+        base.AddChild(_textBlock);
 
         Data = data;
     }
@@ -29,6 +34,6 @@ internal class DataLabel : Label
 
         _contentBuilder.Clear();
         _contentBuilder.Append(_prefix).Append(_data).Append(_postfix);
-        Content = _contentBuilder.ToString();
+        _textBlock.Text = _contentBuilder.ToString();        
     }
 }

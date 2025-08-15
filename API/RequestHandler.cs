@@ -1,11 +1,9 @@
-﻿using System.Data;
-using System.Reflection.Metadata;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
 
 namespace API;
 
-public class RequestHandler: ILocationResponseProvider, IWeatherResponseProvider
+public class RequestHandler : ILocationResponseProvider, IWeatherResponseProvider
 {
     private const string LANGUAGE = "ru";
     private const string WEATHER_METRIC = "metric";
@@ -29,9 +27,10 @@ public class RequestHandler: ILocationResponseProvider, IWeatherResponseProvider
         try
         {
             _requestUrlBuilder.Clear();
-            _requestUrlBuilder.AppendJoin("", LOCATION_URL,"q=", city, "&limit=", LOCATION_LIMIT, "&appid=", API_KEY);
+            _requestUrlBuilder.AppendJoin("", LOCATION_URL, "q=", city, "&limit=", LOCATION_LIMIT, "&appid=", API_KEY);
 
             string content = await GetResponse(_requestUrlBuilder.ToString());
+
             //string content = "[{\"name\":\"Homyel\",\"local_names\":{\"es\":\"Gómel\",\"el\":\"Γόμελ\",\"ka\":\"გომელი\",\"ja\":\"ホメリ\",\"sk\":\"Homeľ\",\"eo\":\"Homel\",\"feature_name\":\"Homieĺ\",\"be\":\"Гомель\",\"vo\":\"Homyel\",\"sr\":\"Гомељ\",\"th\":\"กอเมล\",\"de\":\"Homel\",\"ru\":\"Гомель\",\"fr\":\"Homiel\",\"ascii\":\"Homieĺ\",\"ta\":\"கோமெல்\",\"lt\":\"Gomelis\",\"bg\":\"Гомел\",\"ko\":\"호몔\",\"uk\":\"Гомєль\",\"no\":\"Homjel\",\"fa\":\"گومل\",\"zh\":\"戈梅利\",\"en\":\"Homyel\",\"et\":\"Gomel\",\"tr\":\"Gomel\",\"hu\":\"Homel\",\"ar\":\"غوميل\",\"pl\":\"Homel\",\"lv\":\"Homjeļa\",\"he\":\"הומל\",\"nl\":\"Homel\",\"ur\":\"گومل\",\"sg\":\"戈梅利\",\"tw\":\"戈梅利\"},\"lat\":52.4238936,\"lon\":31.0131698,\"country\":\"BY\",\"state\":\"Homyel Region\"}]";
 
             LocationResponse location = JsonSerializer.Deserialize<List<LocationResponse>>(content)?[0] ??
@@ -51,7 +50,7 @@ public class RequestHandler: ILocationResponseProvider, IWeatherResponseProvider
         try
         {
             _requestUrlBuilder.Clear();
-            _requestUrlBuilder.AppendJoin("", WEATHER_URL,"lat=", latitude, "&lon=", longitude,
+            _requestUrlBuilder.AppendJoin("", WEATHER_URL, "lat=", latitude, "&lon=", longitude,
                                           "&units=", WEATHER_METRIC, "&lang=", LANGUAGE, "&appid=", API_KEY);
 
             string content = await GetResponse(_requestUrlBuilder.ToString());
@@ -63,9 +62,9 @@ public class RequestHandler: ILocationResponseProvider, IWeatherResponseProvider
             return weatherResponse;
         }
         catch
-        {            
+        {
             //logger
-            return null; 
+            return null;
         }
     }
 

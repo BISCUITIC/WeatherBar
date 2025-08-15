@@ -56,7 +56,7 @@ public class IconGenerator : IIconProvider
         if (_isValueNegative) _graphics.DrawString("-", _symbolsFont, _brush, minusSymbolPosition);
         _graphics.DrawString("°", _symbolsFont, _brush, сelsiusSymbolPosition);
         _graphics.DrawString(_valueToDraw, _numbersFont, _brush, valuePosition);
-    }    
+    }
 
     public void Dispose()
     {

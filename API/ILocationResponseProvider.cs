@@ -1,6 +1,6 @@
 ﻿namespace API;
 
-internal interface ILocationResponseProvider
+public interface ILocationResponseProvider
 {
-    Task<LocationResponse?> TryGetLocationResponse(string city);    
+    Task<LocationResponse?> TryGetLocationResponse(string city);
 }

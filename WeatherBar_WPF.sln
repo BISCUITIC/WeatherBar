@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherIconGenerator", "Wea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{3878FE38-899B-4297-9656-F8624F02091B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigHandler", "ConfigHandler\ConfigHandler.csproj", "{64CBB26C-A1F6-4BDF-836F-D588DB35CFF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3878FE38-899B-4297-9656-F8624F02091B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3878FE38-899B-4297-9656-F8624F02091B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3878FE38-899B-4297-9656-F8624F02091B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64CBB26C-A1F6-4BDF-836F-D588DB35CFF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64CBB26C-A1F6-4BDF-836F-D588DB35CFF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64CBB26C-A1F6-4BDF-836F-D588DB35CFF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64CBB26C-A1F6-4BDF-836F-D588DB35CFF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,7 +2,7 @@
 
 namespace WeatherIconGenerator;
 
-public interface IIconProvider: IDisposable
+public interface IIconProvider : IDisposable
 {
     Bitmap GetIconBitmap(int value);
 }
