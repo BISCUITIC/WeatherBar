@@ -1,14 +1,11 @@
 ﻿using API;
 using API.Data;
 using ConfigHandler;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using WeatherBar_WPF.CustomUI;
 using WeatherBar_WPF.UIStates;
 using WeatherIconGenerator;
-using static System.Windows.Forms.AxHost;
 
 namespace WeatherBar_WPF;
 
@@ -26,7 +23,7 @@ public partial class App : Application
         _UI = new UIComponents(OnExitButton_Click, OnCityInputKey_Press);
         _requestHandler = new RequestHandler();
         _cityInputHandler = new CityConfigHandler();
-        _cityInputHandler.OnCityChange +=  async () => { await SearchForNewCity(); };
+        _cityInputHandler.OnCityChange += async () => { await SearchForNewCity(); };
 
         Task.Run(UpdateLoop);
     }
@@ -36,31 +33,18 @@ public partial class App : Application
         while (true)
         {
             await UpdateData(_cityInputHandler.GetLastCity());
-            await Task.Delay(TimeSpan.FromMinutes(5));            
+            await Task.Delay(TimeSpan.FromMinutes(5));
         }
     }
 
     private async Task UpdateUI(UIState state)
     {
         Current.Dispatcher.Invoke(() =>
-        {            
+        {
             _UI.Update(state);
         });
     }
-    //private async Task UpdateUI_LocationError()
-    //{
-    //    Current.Dispatcher.Invoke(() =>
-    //    {
-    //        _UI.UpdateComponents(weatherData, location);
-    //    });
-    //}
-    //private async Task UpdateUI_WeatherError()
-    //{
-    //    Current.Dispatcher.Invoke(() =>
-    //    {
-    //        _UI.UpdateComponents(weatherData, location);
-    //    });
-    //}
+
     private async Task UpdateData(string city)
     {
         UIState state;
@@ -101,12 +85,10 @@ public partial class App : Application
     private void OnCityInputKey_Press(object? sender, KeyEventArgs e)
     {
         if (e.Key == Key.Enter)
-        {            
+        {
             CustomTextBox textBox = (sender as CustomTextBox) ?? throw new Exception("Объект должен быть типа TextBox");
 
             _cityInputHandler.SaveLastCity(textBox.Text);
-
-            //await UpdateDate();
         }
     }
 

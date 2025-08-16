@@ -3,12 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Controls;
-
-using API.Data;
-using WeatherIconGenerator;
 using WeatherBar_WPF.CustomUI;
-using System.Data;
-using System.ComponentModel.Design;
 using WeatherBar_WPF.UIStates;
 
 namespace WeatherBar_WPF;
@@ -17,10 +12,10 @@ internal class UIComponents : IDisposable
 {
     private TaskbarIcon _trayIcon;
 
-    private Border _trayLayout;    
+    private Border _trayLayout;
     private StackPanel _stackPanel;
 
-    private CustomTextBox _cityInput;    
+    private CustomTextBox _cityInput;
 
     private CustomLabel _temperature;
     private CustomLabel _temperatureFeelsLike;
@@ -29,28 +24,24 @@ internal class UIComponents : IDisposable
     private CustomLabel _windSpeed;
     private CustomLabel _description;
 
-    private Button _exitButton;
-
-    //private readonly IIconProvider _iconProvider;
+    private Button _exitButton;   
 
     public TaskbarIcon TrayIcon => _trayIcon;
 
     public CustomTextBox CityInput => _cityInput;
 
-    public CustomLabel Temperature => _temperature ;
-    public CustomLabel TemperatureFeelsLike => _temperatureFeelsLike ;
-    public CustomLabel Pressure => _pressure ;
-    public CustomLabel Humidity => _humidity ;
-    public CustomLabel WindSpeed => _windSpeed ;
-    public CustomLabel Description => _description ;
+    public CustomLabel Temperature => _temperature;
+    public CustomLabel TemperatureFeelsLike => _temperatureFeelsLike;
+    public CustomLabel Pressure => _pressure;
+    public CustomLabel Humidity => _humidity;
+    public CustomLabel WindSpeed => _windSpeed;
+    public CustomLabel Description => _description;
 
     public UIComponents(RoutedEventHandler exit, KeyEventHandler cityKeyPressHandler)
     {
         InitComponents();
         _exitButton.Click += exit;
         _cityInput.KeyDown += cityKeyPressHandler;
-
-        //_iconProvider = new IconGenerator();
     }
     private void InitComponents()
     {
@@ -62,11 +53,11 @@ internal class UIComponents : IDisposable
         {
             FontFamily = labelFontFamily,
             FontSize = labelFontSize,
-            Foreground = labelForeground,            
+            Foreground = labelForeground,
             Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
             BorderBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
             HorizontalAlignment = HorizontalAlignment.Stretch,
-        };      
+        };
 
         _temperature = new CustomLabel(0.ToString(), "Температура : ", " °C")
         {
@@ -96,8 +87,8 @@ internal class UIComponents : IDisposable
         {
             FontFamily = labelFontFamily,
             FontSize = labelFontSize,
-            Foreground = labelForeground,            
-        };        
+            Foreground = labelForeground,
+        };
 
         _exitButton = new Button
         {
@@ -107,7 +98,7 @@ internal class UIComponents : IDisposable
             Foreground = labelForeground,
             Width = 50,
             Padding = new Thickness(2),
-            Margin = new Thickness(0,7,0,3),
+            Margin = new Thickness(0, 7, 0, 3),
         };
 
         _stackPanel = new StackPanel()
@@ -118,8 +109,8 @@ internal class UIComponents : IDisposable
 
         _trayLayout = new Border
         {
-            Background = new SolidColorBrush(Color.FromArgb(255, 44, 44, 44)),
-            BorderBrush = new SolidColorBrush(Color.FromArgb(0, 28, 28, 28)),            
+            Background = new SolidColorBrush(Color.FromArgb(225, 44, 44, 44)),
+            BorderBrush = new SolidColorBrush(Color.FromArgb(0, 28, 28, 28)),
             CornerRadius = new CornerRadius(7),
             Width = 225,
             Child = _stackPanel,
@@ -134,23 +125,6 @@ internal class UIComponents : IDisposable
         };
     }
 
-    //public void UpdateComponents(IWeatherDataProvider weatherData, ILocationDataProvider locationData)
-    //{
-    //    _cityInput.Text = locationData.Name + ", " + locationData.Country;
-    //    _cityInput.LastUpdateTime = DateTime.Now.ToShortTimeString();
-    //    _cityInput.State = "Updated";
-
-    //    _temperature.Data = weatherData.Temperature;
-    //    _pressure.Data = weatherData.Pressure;
-    //    _humidity.Data = weatherData.Humidity;
-    //    _windSpeed.Data = weatherData.WindSpeed;
-    //    _description.Data = weatherData.Description;
-        
-    //    int roundedTemperature = (int)Math.Round(Convert.ToDouble(weatherData.Temperature));
-    //    System.Drawing.Bitmap IconBitmap = _iconProvider.GetIconBitmap(roundedTemperature);
-    //    _trayIcon.Icon = System.Drawing.Icon.FromHandle(IconBitmap.GetHicon());
-    //}
-
     public void ChangeState(string state)
     {
         _cityInput.State = state;
@@ -162,8 +136,7 @@ internal class UIComponents : IDisposable
     }
 
     public void Dispose()
-    {
-        //_iconProvider.Dispose();
+    {      
         _trayIcon.Dispose();
     }
 }

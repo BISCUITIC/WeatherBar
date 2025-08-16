@@ -1,5 +1,4 @@
-﻿using System.CodeDom;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -12,7 +11,7 @@ internal class CustomTextBox : UserControl
     private readonly TextBox _value;
     private readonly TextBlock _state;
     private readonly TextBlock _lastUpdateTime;
-    
+
     public string State { set => _state.Text = value; }
     public string LastUpdateTime { set => _lastUpdateTime.Text = value; }
     public string Text { set => _value.Text = value; get => _value.Text; }
@@ -44,11 +43,11 @@ internal class CustomTextBox : UserControl
             FontFamily = new FontFamily("Segoe UI"),
             FontSize = 12,
             Padding = new Thickness(2),
-            HorizontalAlignment = HorizontalAlignment.Center,    
+            HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
             Foreground = new SolidColorBrush(Color.FromArgb(180, 255, 255, 255)),
-        };      
-       
+        };
+
         _wrapper = new Grid()
         {
             Children = { _state, _value, _lastUpdateTime },

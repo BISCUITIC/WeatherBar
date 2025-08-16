@@ -22,7 +22,7 @@ internal class CustomLabel : Label
         _postfix = postfix;
         _contentBuilder = new StringBuilder();
 
-        _textBlock = new TextBlock() { TextWrapping = TextWrapping.Wrap};
+        _textBlock = new TextBlock() { TextWrapping = TextWrapping.Wrap };
         base.AddChild(_textBlock);
 
         Data = data;
@@ -34,6 +34,6 @@ internal class CustomLabel : Label
 
         _contentBuilder.Clear();
         _contentBuilder.Append(_prefix).Append(_data).Append(_postfix);
-        _textBlock.Text = _contentBuilder.ToString();        
+        _textBlock.Text = _contentBuilder.ToString();
     }
 }
