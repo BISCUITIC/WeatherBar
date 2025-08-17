@@ -1,9 +1,9 @@
 ﻿namespace WeatherBar_WPF.UIStates;
 
-internal class LocationErrorUpdate : UIState
+internal class LocationError : UIState
 {
     private readonly string _city;
-    public LocationErrorUpdate(string city)
+    public LocationError(string city)
     {
         _city = city;
     }

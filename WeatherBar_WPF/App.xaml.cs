@@ -23,6 +23,7 @@ public partial class App : Application
         _UI = new UIComponents(OnExitButton_Click, OnCityInputKey_Press);
         _requestHandler = new RequestHandler();
         _cityInputHandler = new CityConfigHandler();
+
         _cityInputHandler.OnCityChange += async () => { await SearchForNewCity(); };
 
         Task.Run(UpdateLoop);
@@ -57,16 +58,16 @@ public partial class App : Application
             if (weatherResponse is not null)
             {
                 IWeatherDataProvider weatherData = new WeatherData(weatherResponse);
-                state = new SuccesfullUpdate(weatherData, locationData, new IconGenerator());
+                state = new Succesfull(weatherData, locationData, new IconGenerator());
             }
             else
             {
-                state = new WeatherErrorUpdate(locationData);
+                state = new WeatherError(locationData);
             }
         }
         else
         {
-            state = new LocationErrorUpdate(city);
+            state = new LocationError(city);
         }
 
 
@@ -80,7 +81,7 @@ public partial class App : Application
 
     private void OnExitButton_Click(object sender, RoutedEventArgs e)
     {
-        Exit();
+        Close();
     }
     private void OnCityInputKey_Press(object? sender, KeyEventArgs e)
     {
@@ -92,9 +93,9 @@ public partial class App : Application
         }
     }
 
-    private void Exit()
+    private void Close()
     {
         _UI.Dispose();
-        Shutdown();
+        Shutdown();        
     }
 }

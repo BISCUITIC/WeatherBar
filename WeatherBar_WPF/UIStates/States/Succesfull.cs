@@ -1,20 +1,15 @@
 ﻿using API.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WeatherIconGenerator;
 
 namespace WeatherBar_WPF.UIStates;
 
-internal class SuccesfullUpdate : UIState
+internal class Succesfull : UIState
 {
     private readonly IWeatherDataProvider _weather;
     private readonly ILocationDataProvider _location;
     private readonly IIconProvider _iconProvider;
 
-    public SuccesfullUpdate(IWeatherDataProvider weatherData, ILocationDataProvider locationData, IIconProvider iconProvider)
+    public Succesfull(IWeatherDataProvider weatherData, ILocationDataProvider locationData, IIconProvider iconProvider)
     {
         _weather = weatherData;
         _location = locationData;
@@ -33,10 +28,15 @@ internal class SuccesfullUpdate : UIState
         ui.WindSpeed.Data = _weather.WindSpeed;
         ui.Description.Data = _weather.Description;
 
-        int roundedTemperature = (int)Math.Round(Convert.ToDouble(_weather.Temperature));
-        System.Drawing.Bitmap IconBitmap = _iconProvider.GetIconBitmap(roundedTemperature);
-        ui.TrayIcon.Icon = System.Drawing.Icon.FromHandle(IconBitmap.GetHicon());
+        ui.TrayIcon.Icon = GenerateIcon();
 
         _iconProvider.Dispose();
+    }
+
+    private System.Drawing.Icon GenerateIcon()
+    {
+        int roundedTemperature = (int)Math.Round(Convert.ToDouble(_weather.Temperature));
+        System.Drawing.Bitmap IconBitmap = _iconProvider.GetIconBitmap(roundedTemperature);
+        return System.Drawing.Icon.FromHandle(IconBitmap.GetHicon());
     }
 }

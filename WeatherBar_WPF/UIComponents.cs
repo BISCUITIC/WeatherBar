@@ -13,7 +13,7 @@ internal class UIComponents : IDisposable
     private TaskbarIcon _trayIcon;
 
     private Border _trayLayout;
-    private StackPanel _stackPanel;
+    private StackPanel _mainPanel;
 
     private CustomTextBox _cityInput;
 
@@ -45,15 +45,15 @@ internal class UIComponents : IDisposable
     }
     private void InitComponents()
     {
-        Brush labelForeground = new SolidColorBrush(Colors.White);
-        FontFamily labelFontFamily = new FontFamily("Segoe UI");
-        double labelFontSize = 16;
+        FontFamily fontFamily = new FontFamily("Segoe UI");
+        double fontSize   = 16;
+        Brush foreground = new SolidColorBrush(Colors.White);
 
         _cityInput = new CustomTextBox()
         {
-            FontFamily = labelFontFamily,
-            FontSize = labelFontSize,
-            Foreground = labelForeground,
+            FontFamily = fontFamily,
+            FontSize = fontSize,
+            Foreground = foreground,
             Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
             BorderBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -61,50 +61,52 @@ internal class UIComponents : IDisposable
 
         _temperature = new CustomLabel(0.ToString(), "Температура : ", " °C")
         {
-            FontFamily = labelFontFamily,
-            FontSize = labelFontSize,
-            Foreground = labelForeground,
+            FontFamily = fontFamily,
+            FontSize = fontSize,
+            Foreground = foreground,
         };
         _pressure = new CustomLabel(0.ToString(), "Давление : ", " mm Hg")
         {
-            FontFamily = labelFontFamily,
-            FontSize = labelFontSize,
-            Foreground = labelForeground,
+            FontFamily = fontFamily,
+            FontSize = fontSize,
+            Foreground = foreground,
         };
         _humidity = new CustomLabel(0.ToString(), "Влажность : ", " %")
         {
-            FontFamily = labelFontFamily,
-            FontSize = labelFontSize,
-            Foreground = labelForeground,
+            FontFamily = fontFamily,
+            FontSize = fontSize,
+            Foreground = foreground,
         };
         _windSpeed = new CustomLabel(0.ToString(), "Скорость ветра : ", " m/s")
         {
-            FontFamily = labelFontFamily,
-            FontSize = labelFontSize,
-            Foreground = labelForeground,
+            FontFamily = fontFamily,
+            FontSize = fontSize,
+            Foreground = foreground,
         };
         _description = new CustomLabel(0.ToString(), "Погода : ", null)
         {
-            FontFamily = labelFontFamily,
-            FontSize = labelFontSize,
-            Foreground = labelForeground,
+            FontFamily = fontFamily,
+            FontSize = fontSize,
+            Foreground = foreground,
         };
 
         _exitButton = new Button
         {
-            Content = "Выход",
+            FontFamily = fontFamily,
+            FontSize = 12,
+            Foreground = foreground,
             Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
-            BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)),
-            Foreground = labelForeground,
+            BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)),            
             Width = 50,
             Padding = new Thickness(2),
             Margin = new Thickness(0, 7, 0, 3),
+            Content = "Выход",
         };
 
-        _stackPanel = new StackPanel()
+        _mainPanel = new StackPanel()
         {
-            Children = { _cityInput, _temperature, _pressure, _humidity, _windSpeed, _description, _exitButton },
             Margin = new Thickness(5),
+            Children = { _cityInput, _temperature, _pressure, _humidity, _windSpeed, _description, _exitButton },
         };
 
         _trayLayout = new Border
@@ -113,15 +115,15 @@ internal class UIComponents : IDisposable
             BorderBrush = new SolidColorBrush(Color.FromArgb(0, 28, 28, 28)),
             CornerRadius = new CornerRadius(7),
             Width = 225,
-            Child = _stackPanel,
+            Child = _mainPanel,
         };
 
         _trayIcon = new TaskbarIcon
         {
             Icon = System.Drawing.SystemIcons.Information,
-            ToolTipText = "Weather Bar",
             TrayPopup = _trayLayout,
             PopupActivation = PopupActivationMode.LeftOrRightClick,
+            ToolTipText = "Weather Bar",
         };
     }
 
