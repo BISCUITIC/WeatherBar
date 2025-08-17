@@ -8,8 +8,6 @@ public class WeatherData : IWeatherDataProvider
     public string Humidity { get; init; }
     public string WindSpeed { get; init; }
     public string Description { get; init; }
-   
-
 
     private const double hpa_INTO_mmHg = 0.750062;
 
@@ -22,6 +20,6 @@ public class WeatherData : IWeatherDataProvider
         WindSpeed = weather.Wind.Speed.ToString();
         Description = weather.Weather[0].Description;
 
-      
+
     }
 }

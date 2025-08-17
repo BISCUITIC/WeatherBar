@@ -1,7 +1,4 @@
-﻿using System.Diagnostics.Metrics;
-using System.Xml.Linq;
-
-namespace API.Data;
+﻿namespace API.Data;
 
 public class LocationData : ILocationDataProvider
 {
@@ -14,7 +11,7 @@ public class LocationData : ILocationDataProvider
     {
         Latitude = location.Latitude;
         Longitude = location.Longitude;
-        
+
         Name = location.Name;
         Country = location.Country;
     }

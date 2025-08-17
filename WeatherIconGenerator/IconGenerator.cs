@@ -14,7 +14,7 @@ public class IconGenerator : IIconProvider
     private readonly Font _symbolsFont;
     private readonly Brush _brush;
 
-    private string _valueToDraw;
+    private string? _valueToDraw;
     private bool _isValueNegative;
 
     public IconGenerator()
