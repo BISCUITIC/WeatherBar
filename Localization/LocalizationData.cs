@@ -10,7 +10,7 @@ public class LocalizationData : ILocalizationData
     public string Pressure { get; set; }
     [JsonPropertyName("Humidity")]
     public string Humidity { get; set; }
-    [JsonPropertyName("WindSpeed ")]
+    [JsonPropertyName("WindSpeed")]
     public string WindSpeed { get; set; }
     [JsonPropertyName("Description")]
     public string Description { get; set; }
