@@ -19,8 +19,8 @@ public class IconGenerator : IIconProvider
 
     public IconGenerator()
     {
-        _numbersFont = new Font("Arial", 10);
-        _symbolsFont = new Font("Arial", 9);
+        _numbersFont = new Font("Arial", 6);
+        _symbolsFont = new Font("Arial", 6);
         _brush = Brushes.White;
 
         _bitmap = new Bitmap(_width, _height);

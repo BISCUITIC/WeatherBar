@@ -1,6 +1,8 @@
 ﻿using API;
 using API.Data;
 using ConfigHandler;
+using Localization;
+using Localization.Localizations;
 using System.Windows;
 using System.Windows.Input;
 using WeatherBar_WPF.CustomUI;
@@ -17,10 +19,16 @@ public partial class App : Application
     private UIComponents _UI;
     private RequestHandler _requestHandler;
     private ICityInputHandler _cityInputHandler;
-
+   
+    private LocalizationConfigHandler _localizator;
+    private LanguageLocalization _localization;
     public void Start(object sender, StartupEventArgs e)
     {
-        _UI = new UIComponents(OnExitButton_Click, OnCityInputKey_Press);
+        _localizator = new LocalizationConfigHandler();
+        _localization = new RuLocalization(_localizator);
+
+        _UI = new UIComponents(_localization, OnExitButton_Click, OnCityInputKey_Press);
+        
         _requestHandler = new RequestHandler();
         _cityInputHandler = new CityConfigHandler();
 

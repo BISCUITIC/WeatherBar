@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigHandler", "ConfigHandler\ConfigHandler.csproj", "{64CBB26C-A1F6-4BDF-836F-D588DB35CFF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization", "Localization\Localization.csproj", "{2BAB8998-83B1-4259-A323-4EBD614DB594}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{64CBB26C-A1F6-4BDF-836F-D588DB35CFF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64CBB26C-A1F6-4BDF-836F-D588DB35CFF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64CBB26C-A1F6-4BDF-836F-D588DB35CFF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BAB8998-83B1-4259-A323-4EBD614DB594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BAB8998-83B1-4259-A323-4EBD614DB594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BAB8998-83B1-4259-A323-4EBD614DB594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BAB8998-83B1-4259-A323-4EBD614DB594}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

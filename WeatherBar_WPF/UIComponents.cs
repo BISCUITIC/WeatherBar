@@ -5,11 +5,14 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using WeatherBar_WPF.CustomUI;
 using WeatherBar_WPF.UIStates;
+using Localization;
 
 namespace WeatherBar_WPF;
 
 internal class UIComponents : IDisposable
 {
+    private LanguageLocalization _languageLocalization;
+
     private TaskbarIcon _trayIcon;
 
     private Border _trayLayout;
@@ -37,8 +40,11 @@ internal class UIComponents : IDisposable
     public CustomLabel WindSpeed => _windSpeed;
     public CustomLabel Description => _description;
 
-    public UIComponents(RoutedEventHandler exit, KeyEventHandler cityKeyPressHandler)
+    
+
+    public UIComponents(LanguageLocalization languageLocalization ,RoutedEventHandler exit, KeyEventHandler cityKeyPressHandler)
     {
+        _languageLocalization = languageLocalization;
         InitComponents();
         _exitButton.Click += exit;
         _cityInput.KeyDown += cityKeyPressHandler;
@@ -59,31 +65,31 @@ internal class UIComponents : IDisposable
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
 
-        _temperature = new CustomLabel(0.ToString(), "Температура : ", " °C")
+        _temperature = new CustomLabel(0.ToString(), $"{_languageLocalization.Temperature} : ", " °C")
         {
             FontFamily = fontFamily,
             FontSize = fontSize,
             Foreground = foreground,
         };
-        _pressure = new CustomLabel(0.ToString(), "Давление : ", " mm Hg")
+        _pressure = new CustomLabel(0.ToString(), $"{_languageLocalization.Pressure} : ", " mm Hg")
         {
             FontFamily = fontFamily,
             FontSize = fontSize,
             Foreground = foreground,
         };
-        _humidity = new CustomLabel(0.ToString(), "Влажность : ", " %")
+        _humidity = new CustomLabel(0.ToString(), $"{_languageLocalization.Humidity} : ", " %")
         {
             FontFamily = fontFamily,
             FontSize = fontSize,
             Foreground = foreground,
         };
-        _windSpeed = new CustomLabel(0.ToString(), "Скорость ветра : ", " m/s")
+        _windSpeed = new CustomLabel(0.ToString(), $"{_languageLocalization.WindSpeed} : ", " m/s")
         {
             FontFamily = fontFamily,
             FontSize = fontSize,
             Foreground = foreground,
         };
-        _description = new CustomLabel(0.ToString(), "Погода : ", null)
+        _description = new CustomLabel(0.ToString(), $"{_languageLocalization.Description} : ", null)
         {
             FontFamily = fontFamily,
             FontSize = fontSize,
