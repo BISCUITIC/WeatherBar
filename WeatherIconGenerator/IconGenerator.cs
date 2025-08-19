@@ -20,9 +20,9 @@ public class IconGenerator : IIconProvider
 
     public IconGenerator()
     {
-        _celciusFont = new Font("Segoe UI", 15);
-        _symbolsFont = new Font("Segoe UI", 15);
-        _minusFont = new Font("Segoe UI", 15);
+        _celciusFont = new Font("Arial", 12);
+        _symbolsFont = new Font("Arial", 13);
+        _minusFont = new Font("Arial", 15);
         _brush = Brushes.White;
 
         _bitmap = new Bitmap(_width, _height);
@@ -41,11 +41,11 @@ public class IconGenerator : IIconProvider
 
         if (IsTwoDigit(value))
         {
-            DrawSymbols(new PointF(17, -10), new PointF(-7, -20), new PointF(-7, -1));
+            DrawSymbols(new PointF(15, -4), new PointF(-6, -17), new PointF(-6, 3));
         }
         else
         {
-            DrawSymbols(new PointF(17, -10), new PointF(-7, -1), new PointF(3, -1));
+            DrawSymbols(new PointF(15, -4), new PointF(-6, 0), new PointF(6, 3));
         }
 
         return _bitmap;
@@ -56,8 +56,8 @@ public class IconGenerator : IIconProvider
     private void DrawSymbols(PointF сelsiusSymbolPosition, PointF minusSymbolPosition, PointF valuePosition)
     {
         if (_isValueNegative) _graphics.DrawString("-", _minusFont, _brush, minusSymbolPosition);
-        _graphics.DrawString("°", _symbolsFont, _brush, сelsiusSymbolPosition);
-        _graphics.DrawString(_valueToDraw, _celciusFont, _brush, valuePosition);
+        _graphics.DrawString("°", _celciusFont, _brush, сelsiusSymbolPosition);
+        _graphics.DrawString(_valueToDraw, _symbolsFont, _brush, valuePosition);
     }
 
     public void Dispose()
