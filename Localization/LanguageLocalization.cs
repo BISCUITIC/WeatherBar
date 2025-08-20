@@ -9,6 +9,7 @@ public abstract class LanguageLocalization
     public string Humidity { get; private init; }
     public string WindSpeed { get; private init; }    
     public string Description { get; private init; }
+    public string Exit { get; private init; }
 
     private readonly ILocalizationProvider _localizationProvider;
 
@@ -23,5 +24,6 @@ public abstract class LanguageLocalization
         Humidity = localizationData.Humidity;
         WindSpeed = localizationData.WindSpeed; 
         Description = localizationData.Description;
+        Exit = localizationData.Exit;
     }
 }

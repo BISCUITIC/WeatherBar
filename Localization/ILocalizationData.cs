@@ -9,4 +9,5 @@ public interface ILocalizationData
     string Humidity { get; }   
     string WindSpeed { get; }   
     string Description { get; }
+    string Exit { get; }
 }

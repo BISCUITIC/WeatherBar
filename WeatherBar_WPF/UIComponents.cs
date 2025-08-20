@@ -106,7 +106,7 @@ internal class UIComponents : IDisposable
             Width = 50,
             Padding = new Thickness(2),
             Margin = new Thickness(0, 7, 0, 3),
-            Content = "Выход",
+            Content = _languageLocalization.Exit,
         };
 
         _mainPanel = new StackPanel()

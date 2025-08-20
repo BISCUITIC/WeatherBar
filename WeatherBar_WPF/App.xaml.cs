@@ -25,7 +25,7 @@ public partial class App : Application
     public void Start(object sender, StartupEventArgs e)
     {
         _localizator = new LocalizationConfigHandler();
-        _localization = new RuLocalization(_localizator);
+        _localization = new FrLocalization(_localizator);
 
         _UI = new UIComponents(_localization, OnExitButton_Click, OnCityInputKey_Press);
         

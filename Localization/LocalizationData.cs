@@ -14,4 +14,6 @@ public class LocalizationData : ILocalizationData
     public string WindSpeed { get; set; }
     [JsonPropertyName("Description")]
     public string Description { get; set; }
+    [JsonPropertyName("Exit")]
+    public string Exit { get; set; }
 }
