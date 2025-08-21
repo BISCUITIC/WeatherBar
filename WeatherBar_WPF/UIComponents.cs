@@ -20,12 +20,14 @@ internal class UIComponents : IDisposable
 
     private CustomTextBox _cityInput;
 
-    private CustomLabel _temperature;
-    private CustomLabel _temperatureFeelsLike;
-    private CustomLabel _pressure;
-    private CustomLabel _humidity;
-    private CustomLabel _windSpeed;
-    private CustomLabel _description;
+    //private CustomLabel _temperature;
+    //private CustomLabel _temperatureFeelsLike;
+    //private CustomLabel _pressure;
+    //private CustomLabel _humidity;
+    //private CustomLabel _windSpeed;
+    //private CustomLabel _description;
+
+    private DataPanel _weatherDataPanel;
 
     private Button _exitButton;   
 
@@ -33,12 +35,14 @@ internal class UIComponents : IDisposable
 
     public CustomTextBox CityInput => _cityInput;
 
-    public CustomLabel Temperature => _temperature;
-    public CustomLabel TemperatureFeelsLike => _temperatureFeelsLike;
-    public CustomLabel Pressure => _pressure;
-    public CustomLabel Humidity => _humidity;
-    public CustomLabel WindSpeed => _windSpeed;
-    public CustomLabel Description => _description;
+    public DataPanel WeatherDataPanel => _weatherDataPanel;
+
+    //public CustomLabel Temperature => _temperature;
+    //public CustomLabel TemperatureFeelsLike => _temperatureFeelsLike;
+    //public CustomLabel Pressure => _pressure;
+    //public CustomLabel Humidity => _humidity;
+    //public CustomLabel WindSpeed => _windSpeed;
+    //public CustomLabel Description => _description;
 
     
 
@@ -65,36 +69,39 @@ internal class UIComponents : IDisposable
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
 
-        _temperature = new CustomLabel(0.ToString(), $"{_languageLocalization.Temperature} : ", " °C")
-        {
-            FontFamily = fontFamily,
-            FontSize = fontSize,
-            Foreground = foreground,
-        };
-        _pressure = new CustomLabel(0.ToString(), $"{_languageLocalization.Pressure} : ", " mm Hg")
-        {
-            FontFamily = fontFamily,
-            FontSize = fontSize,
-            Foreground = foreground,
-        };
-        _humidity = new CustomLabel(0.ToString(), $"{_languageLocalization.Humidity} : ", " %")
-        {
-            FontFamily = fontFamily,
-            FontSize = fontSize,
-            Foreground = foreground,
-        };
-        _windSpeed = new CustomLabel(0.ToString(), $"{_languageLocalization.WindSpeed} : ", " m/s")
-        {
-            FontFamily = fontFamily,
-            FontSize = fontSize,
-            Foreground = foreground,
-        };
-        _description = new CustomLabel(0.ToString(), $"{_languageLocalization.Description} : ", null)
-        {
-            FontFamily = fontFamily,
-            FontSize = fontSize,
-            Foreground = foreground,
-        };
+        #region Old
+        //_temperature = new CustomLabel(0.ToString(), $"{_languageLocalization.Temperature} : ", " °C")
+        //{
+        //    FontFamily = fontFamily,
+        //    FontSize = fontSize,
+        //    Foreground = foreground,
+        //};
+        //_pressure = new CustomLabel(0.ToString(), $"{_languageLocalization.Pressure} : ", " mm Hg")
+        //{
+        //    FontFamily = fontFamily,
+        //    FontSize = fontSize,
+        //    Foreground = foreground,
+        //};
+        //_humidity = new CustomLabel(0.ToString(), $"{_languageLocalization.Humidity} : ", " %")
+        //{
+        //    FontFamily = fontFamily,
+        //    FontSize = fontSize,
+        //    Foreground = foreground,
+        //};
+        //_windSpeed = new CustomLabel(0.ToString(), $"{_languageLocalization.WindSpeed} : ", " m/s")
+        //{
+        //    FontFamily = fontFamily,
+        //    FontSize = fontSize,
+        //    Foreground = foreground,
+        //};
+        //_description = new CustomLabel(0.ToString(), $"{_languageLocalization.Description} : ", null)
+        //{
+        //    FontFamily = fontFamily,
+        //    FontSize = fontSize,
+        //    Foreground = foreground,
+        //};
+        #endregion
+        _weatherDataPanel = new DataPanel(_languageLocalization, fontFamily, fontSize, foreground);
 
         _exitButton = new Button
         {
@@ -112,7 +119,7 @@ internal class UIComponents : IDisposable
         _mainPanel = new StackPanel()
         {
             Margin = new Thickness(5),
-            Children = { _cityInput, _temperature, _pressure, _humidity, _windSpeed, _description, _exitButton },
+            Children = { _cityInput, _weatherDataPanel, _exitButton },
         };
 
         _trayLayout = new Border

@@ -22,11 +22,11 @@ internal class Succesfull : UIState
         ui.CityInput.LastUpdateTime = DateTime.Now.ToShortTimeString();
         ui.CityInput.State = "Updated";
 
-        ui.Temperature.Data = _weather.Temperature;
-        ui.Pressure.Data = _weather.Pressure;
-        ui.Humidity.Data = _weather.Humidity;
-        ui.WindSpeed.Data = _weather.WindSpeed;
-        ui.Description.Data = _weather.Description;
+        ui.WeatherDataPanel.Temperature.Data = _weather.Temperature;
+        ui.WeatherDataPanel.Pressure.Data = _weather.Pressure;
+        ui.WeatherDataPanel.Humidity.Data = _weather.Humidity;
+        ui.WeatherDataPanel.WindSpeed.Data = _weather.WindSpeed;
+        ui.WeatherDataPanel.Description.Data = _weather.Description;
 
         ui.TrayIcon.Icon = GenerateIcon();
 
