@@ -4,15 +4,14 @@ namespace WeatherIconGenerator;
 
 public class IconGenerator : IIconProvider
 {
-    private const int _width = 32;
-    private const int _height = 32;
+    private const int _width = 16;
+    private const int _height = 16;
 
     private readonly Bitmap _bitmap;
     private readonly Graphics _graphics;
 
-    private readonly Font _celciusFont;
+    private readonly Font _numbersFont;
     private readonly Font _symbolsFont;
-    private readonly Font _minusFont;
     private readonly Brush _brush;
 
     private string? _valueToDraw;
@@ -20,9 +19,8 @@ public class IconGenerator : IIconProvider
 
     public IconGenerator()
     {
-        _celciusFont = new Font("Arial", 12);
-        _symbolsFont = new Font("Arial", 13);
-        _minusFont = new Font("Arial", 15);
+        _numbersFont = new Font("Arial", 10);
+        _symbolsFont = new Font("Arial", 9);
         _brush = Brushes.White;
 
         _bitmap = new Bitmap(_width, _height);
@@ -41,11 +39,11 @@ public class IconGenerator : IIconProvider
 
         if (IsTwoDigit(value))
         {
-            DrawSymbols(new PointF(15, -4), new PointF(-6, -17), new PointF(-6, 3));
+            DrawSymbols(new PointF(9, -3), new PointF(-2, -7), new PointF(-3, 1));
         }
         else
         {
-            DrawSymbols(new PointF(15, -4), new PointF(-6, 0), new PointF(6, 3));
+            DrawSymbols(new PointF(9, -3), new PointF(-2, 1), new PointF(3, 1));
         }
 
         return _bitmap;
@@ -55,9 +53,9 @@ public class IconGenerator : IIconProvider
     private bool IsMoreTwoDigit(int value) => Math.Abs(value) > 99;
     private void DrawSymbols(PointF сelsiusSymbolPosition, PointF minusSymbolPosition, PointF valuePosition)
     {
-        if (_isValueNegative) _graphics.DrawString("-", _minusFont, _brush, minusSymbolPosition);
-        _graphics.DrawString("°", _celciusFont, _brush, сelsiusSymbolPosition);
-        _graphics.DrawString(_valueToDraw, _symbolsFont, _brush, valuePosition);
+        if (_isValueNegative) _graphics.DrawString("-", _symbolsFont, _brush, minusSymbolPosition);
+        _graphics.DrawString("°", _symbolsFont, _brush, сelsiusSymbolPosition);
+        _graphics.DrawString(_valueToDraw, _numbersFont, _brush, valuePosition);
     }
 
     public void Dispose()
