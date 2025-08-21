@@ -1,14 +1,10 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
-using Localization;
-using System.Drawing;
+﻿using Localization;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media;
 
 namespace WeatherBar_WPF.CustomUI;
 
-internal class DataPanel: UserControl
+internal class DataPanel : UserControl
 {
     private readonly LanguageLocalization _languageLocalization;
 
@@ -31,7 +27,7 @@ internal class DataPanel: UserControl
     public DataPanel(LanguageLocalization languageLocalization,
                      System.Windows.Media.FontFamily fontFamily,
                      double fontSize,
-                     System.Windows.Media.Brush foreground )
+                     System.Windows.Media.Brush foreground)
     {
         _languageLocalization = languageLocalization;
 
@@ -70,8 +66,8 @@ internal class DataPanel: UserControl
         {
             Margin = new Thickness(5),
             Children = { _temperature, _pressure, _humidity, _windSpeed, _description },
-        };        
+        };
 
-        Content = _layout; 
+        Content = _layout;
     }
 }

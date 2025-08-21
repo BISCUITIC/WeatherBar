@@ -3,6 +3,7 @@ using API.Data;
 using ConfigHandler;
 using Localization;
 using Localization.Localizations;
+using WinForm = System.Windows.Forms;
 using System.Windows;
 using System.Windows.Input;
 using WeatherBar_WPF.CustomUI;
@@ -19,16 +20,17 @@ public partial class App : Application
     private UIComponents _UI;
     private RequestHandler _requestHandler;
     private ICityInputHandler _cityInputHandler;
-   
+
     private LocalizationConfigHandler _localizator;
     private LanguageLocalization _localization;
+
     public void Start(object sender, StartupEventArgs e)
     {
         _localizator = new LocalizationConfigHandler();
         _localization = new FrLocalization(_localizator);
 
         _UI = new UIComponents(_localization, OnExitButton_Click, OnCityInputKey_Press);
-        
+
         _requestHandler = new RequestHandler();
         _cityInputHandler = new CityConfigHandler();
 
@@ -66,7 +68,7 @@ public partial class App : Application
             if (weatherResponse is not null)
             {
                 IWeatherDataProvider weatherData = new WeatherData(weatherResponse);
-                state = new Succesfull(weatherData, locationData, new IconGenerator());
+                state = new Succesfull(weatherData, locationData, new IconGenerator(WinForm.SystemInformation.SmallIconSize.Width));
             }
             else
             {
@@ -104,6 +106,6 @@ public partial class App : Application
     private void Close()
     {
         _UI.Dispose();
-        Shutdown();        
+        Shutdown();
     }
 }

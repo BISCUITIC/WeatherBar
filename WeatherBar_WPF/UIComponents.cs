@@ -1,11 +1,12 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
+using Localization;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Input;
 using System.Windows.Controls;
+
+using System.Windows.Input;
+using System.Windows.Media;
 using WeatherBar_WPF.CustomUI;
 using WeatherBar_WPF.UIStates;
-using Localization;
 
 namespace WeatherBar_WPF;
 
@@ -19,16 +20,7 @@ internal class UIComponents : IDisposable
     private StackPanel _mainPanel;
 
     private CustomTextBox _cityInput;
-
-    //private CustomLabel _temperature;
-    //private CustomLabel _temperatureFeelsLike;
-    //private CustomLabel _pressure;
-    //private CustomLabel _humidity;
-    //private CustomLabel _windSpeed;
-    //private CustomLabel _description;
-
     private DataPanel _weatherDataPanel;
-
     private Button _exitButton;   
 
     public TaskbarIcon TrayIcon => _trayIcon;
@@ -37,21 +29,12 @@ internal class UIComponents : IDisposable
 
     public DataPanel WeatherDataPanel => _weatherDataPanel;
 
-    //public CustomLabel Temperature => _temperature;
-    //public CustomLabel TemperatureFeelsLike => _temperatureFeelsLike;
-    //public CustomLabel Pressure => _pressure;
-    //public CustomLabel Humidity => _humidity;
-    //public CustomLabel WindSpeed => _windSpeed;
-    //public CustomLabel Description => _description;
-
-    
-
     public UIComponents(LanguageLocalization languageLocalization ,RoutedEventHandler exit, KeyEventHandler cityKeyPressHandler)
     {
         _languageLocalization = languageLocalization;
         InitComponents();
         _exitButton.Click += exit;
-        _cityInput.KeyDown += cityKeyPressHandler;
+        _cityInput.KeyDown += cityKeyPressHandler;        
     }
     private void InitComponents()
     {
@@ -68,39 +51,7 @@ internal class UIComponents : IDisposable
             BorderBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
-
-        #region Old
-        //_temperature = new CustomLabel(0.ToString(), $"{_languageLocalization.Temperature} : ", " °C")
-        //{
-        //    FontFamily = fontFamily,
-        //    FontSize = fontSize,
-        //    Foreground = foreground,
-        //};
-        //_pressure = new CustomLabel(0.ToString(), $"{_languageLocalization.Pressure} : ", " mm Hg")
-        //{
-        //    FontFamily = fontFamily,
-        //    FontSize = fontSize,
-        //    Foreground = foreground,
-        //};
-        //_humidity = new CustomLabel(0.ToString(), $"{_languageLocalization.Humidity} : ", " %")
-        //{
-        //    FontFamily = fontFamily,
-        //    FontSize = fontSize,
-        //    Foreground = foreground,
-        //};
-        //_windSpeed = new CustomLabel(0.ToString(), $"{_languageLocalization.WindSpeed} : ", " m/s")
-        //{
-        //    FontFamily = fontFamily,
-        //    FontSize = fontSize,
-        //    Foreground = foreground,
-        //};
-        //_description = new CustomLabel(0.ToString(), $"{_languageLocalization.Description} : ", null)
-        //{
-        //    FontFamily = fontFamily,
-        //    FontSize = fontSize,
-        //    Foreground = foreground,
-        //};
-        #endregion
+        
         _weatherDataPanel = new DataPanel(_languageLocalization, fontFamily, fontSize, foreground);
 
         _exitButton = new Button

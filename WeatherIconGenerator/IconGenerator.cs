@@ -1,11 +1,15 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace WeatherIconGenerator;
 
 public class IconGenerator : IIconProvider
 {
-    private const int _width = 16;
-    private const int _height = 16;
+    private const int _defualtIconSize = 16;
+
+    private readonly int _width;
+    private readonly int _height;
+    private readonly float _scale;
 
     private readonly Bitmap _bitmap;
     private readonly Graphics _graphics;
@@ -17,10 +21,14 @@ public class IconGenerator : IIconProvider
     private string? _valueToDraw;
     private bool _isValueNegative;
 
-    public IconGenerator()
+    public IconGenerator(int iconSize)
     {
-        _numbersFont = new Font("Arial", 10);
-        _symbolsFont = new Font("Arial", 9);
+        _scale = iconSize / _defualtIconSize;
+        _width = iconSize;
+        _height = iconSize;
+
+        _numbersFont = new Font("Arial", 10 * _scale);
+        _symbolsFont = new Font("Arial", 9 * _scale);
         _brush = Brushes.White;
 
         _bitmap = new Bitmap(_width, _height);
@@ -30,20 +38,23 @@ public class IconGenerator : IIconProvider
 
     public Bitmap GetIconBitmap(int value)
     {
-        _graphics.Clear(Color.FromArgb(0, 0, 0, 0));
-
         if (IsMoreTwoDigit(value)) throw new ArgumentException("Аргумент не может принимать значение больше 99");
 
         _isValueNegative = value < 0;
         _valueToDraw = Math.Abs(value).ToString();
+        _graphics.Clear(Color.FromArgb(0, 0, 0, 0));
 
         if (IsTwoDigit(value))
         {
-            DrawSymbols(new PointF(9, -3), new PointF(-2, -7), new PointF(-3, 1));
+            DrawSymbols(new PointF(9  * _scale, -3 * _scale), 
+                        new PointF(-2 * _scale, -7 * _scale), 
+                        new PointF(-3 * _scale,  1 * _scale));
         }
         else
         {
-            DrawSymbols(new PointF(9, -3), new PointF(-2, 1), new PointF(3, 1));
+            DrawSymbols(new PointF(9  * _scale, -3 * _scale), 
+                        new PointF(-2 * _scale, 1  * _scale), 
+                        new PointF(3  * _scale, 1  * _scale));
         }
 
         return _bitmap;
