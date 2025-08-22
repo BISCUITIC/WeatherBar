@@ -2,7 +2,6 @@
 using Localization;
 using System.Windows;
 using System.Windows.Controls;
-
 using System.Windows.Input;
 using System.Windows.Media;
 using WeatherBar_WPF.CustomUI;
@@ -12,7 +11,7 @@ namespace WeatherBar_WPF;
 
 internal class UIComponents : IDisposable
 {
-    private LanguageLocalization _languageLocalization;
+    private ILocalizationData _localization;
 
     private TaskbarIcon _trayIcon;
 
@@ -21,25 +20,22 @@ internal class UIComponents : IDisposable
 
     private CustomTextBox _cityInput;
     private DataPanel _weatherDataPanel;
-    private Button _exitButton;   
-
-    public TaskbarIcon TrayIcon => _trayIcon;
-
+    private BottomPanel _bottomPanel;
+    
     public CustomTextBox CityInput => _cityInput;
-
     public DataPanel WeatherDataPanel => _weatherDataPanel;
 
-    public UIComponents(LanguageLocalization languageLocalization ,RoutedEventHandler exit, KeyEventHandler cityKeyPressHandler)
+    public UIComponents(ILocalizationData languageLocalization, RoutedEventHandler exit, KeyEventHandler cityKeyPressHandler)
     {
-        _languageLocalization = languageLocalization;
-        InitComponents();
-        _exitButton.Click += exit;
-        _cityInput.KeyDown += cityKeyPressHandler;        
+        _localization = languageLocalization;
+        InitComponents(exit);        
+        _cityInput.KeyDown += cityKeyPressHandler;
     }
-    private void InitComponents()
+
+    private void InitComponents(RoutedEventHandler exit)
     {
         FontFamily fontFamily = new FontFamily("Segoe UI");
-        double fontSize   = 16;
+        double fontSize = 16;
         Brush foreground = new SolidColorBrush(Colors.White);
 
         _cityInput = new CustomTextBox()
@@ -51,26 +47,15 @@ internal class UIComponents : IDisposable
             BorderBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
-        
-        _weatherDataPanel = new DataPanel(_languageLocalization, fontFamily, fontSize, foreground);
 
-        _exitButton = new Button
-        {
-            FontFamily = fontFamily,
-            FontSize = 12,
-            Foreground = foreground,
-            Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
-            BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)),            
-            Width = 50,
-            Padding = new Thickness(2),
-            Margin = new Thickness(0, 7, 0, 3),
-            Content = _languageLocalization.Exit,
-        };
+        _weatherDataPanel = new DataPanel(_localization, fontFamily, fontSize, foreground);
+
+        _bottomPanel = new BottomPanel(_localization, fontFamily, fontSize, foreground, exit);       
 
         _mainPanel = new StackPanel()
         {
             Margin = new Thickness(5),
-            Children = { _cityInput, _weatherDataPanel, _exitButton },
+            Children = { _cityInput, _weatherDataPanel, _bottomPanel},
         };
 
         _trayLayout = new Border
@@ -91,18 +76,13 @@ internal class UIComponents : IDisposable
         };
     }
 
-    public void ChangeState(string state)
-    {
-        _cityInput.State = state;
-    }
-
     public void Update(UIState state)
     {
         state.Apply(this);
     }
 
     public void Dispose()
-    {      
+    {
         _trayIcon.Dispose();
     }
 }

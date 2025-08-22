@@ -1,13 +1,11 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace Localization;
 
-namespace Localization;
-
-public abstract class LanguageLocalization
+public abstract class LanguageLocalization: ILocalizationData
 {
     public string Temperature { get; private init; }
-    public string Pressure { get; private init; }    
+    public string Pressure { get; private init; }
     public string Humidity { get; private init; }
-    public string WindSpeed { get; private init; }    
+    public string WindSpeed { get; private init; }
     public string Description { get; private init; }
     public string Exit { get; private init; }
 
@@ -22,7 +20,7 @@ public abstract class LanguageLocalization
         Temperature = localizationData.Temperature;
         Pressure = localizationData.Pressure;
         Humidity = localizationData.Humidity;
-        WindSpeed = localizationData.WindSpeed; 
+        WindSpeed = localizationData.WindSpeed;
         Description = localizationData.Description;
         Exit = localizationData.Exit;
     }

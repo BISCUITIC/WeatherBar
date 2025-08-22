@@ -3,12 +3,12 @@ using API.Data;
 using ConfigHandler;
 using Localization;
 using Localization.Localizations;
-using WinForm = System.Windows.Forms;
 using System.Windows;
 using System.Windows.Input;
 using WeatherBar_WPF.CustomUI;
 using WeatherBar_WPF.UIStates;
 using WeatherIconGenerator;
+using WinForm = System.Windows.Forms;
 
 namespace WeatherBar_WPF;
 
@@ -18,10 +18,12 @@ namespace WeatherBar_WPF;
 public partial class App : Application
 {
     private UIComponents _UI;
+    private UIState _UIstate;
+
     private RequestHandler _requestHandler;
     private ICityInputHandler _cityInputHandler;
 
-    private LocalizationConfigHandler _localizator;
+    private ILocalizationProvider _localizator;
     private LanguageLocalization _localization;
 
     public void Start(object sender, StartupEventArgs e)
@@ -58,7 +60,6 @@ public partial class App : Application
 
     private async Task UpdateData(string city)
     {
-        UIState state;
         LocationResponse? locationResponse = await _requestHandler.TryGetLocationResponse(city);
 
         if (locationResponse is not null)
@@ -68,20 +69,19 @@ public partial class App : Application
             if (weatherResponse is not null)
             {
                 IWeatherDataProvider weatherData = new WeatherData(weatherResponse);
-                state = new Succesfull(weatherData, locationData, new IconGenerator(WinForm.SystemInformation.SmallIconSize.Width));
+                _UIstate = new Succesfull(weatherData, locationData, new IconGenerator(WinForm.SystemInformation.SmallIconSize.Width));
             }
             else
             {
-                state = new WeatherError(locationData);
+                _UIstate = new WeatherError(locationData);
             }
         }
         else
         {
-            state = new LocationError(city);
+            _UIstate = new LocationError(city);
         }
 
-
-        await UpdateUI(state);
+        await UpdateUI(_UIstate);
     }
 
     private async Task SearchForNewCity()
