@@ -2,10 +2,10 @@
 
 public class LocationData : ILocationDataProvider
 {
-    public double Latitude { get; init; }
-    public double Longitude { get; init; }
-    public string Name { get; init; }
-    public string Country { get; init; }
+    public double Latitude { get; private init; }
+    public double Longitude { get; private init; }
+    public string Name { get; private init; }
+    public string Country { get; private init; }
 
     public LocationData(LocationResponse location)
     {
