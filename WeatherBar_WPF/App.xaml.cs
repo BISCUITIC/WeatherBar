@@ -23,13 +23,13 @@ public partial class App : Application
     private RequestHandler _requestHandler;
     private ICityInputHandler _cityInputHandler;
 
-    private ILocalizationProvider _localizator;
     private LanguageLocalization _localization;
+    private ILocalizationProvider _localizator;
 
     public void Start(object sender, StartupEventArgs e)
     {
         _localizator = new LocalizationConfigHandler();
-        _localization = new FrLocalization(_localizator);
+        _localization = new FrLocalization(_localizator);        
 
         _UI = new UIComponents(_localization, OnExitButton_Click, OnCityInputKey_Press);
 

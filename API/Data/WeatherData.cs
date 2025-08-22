@@ -2,12 +2,12 @@
 
 public class WeatherData : IWeatherDataProvider
 {
-    public string Temperature { get; init; }
-    public string TemperatureFeelsLike { get; init; }
-    public string Pressure { get; init; }
-    public string Humidity { get; init; }
-    public string WindSpeed { get; init; }
-    public string Description { get; init; }
+    public string Temperature { get; private init; }
+    public string TemperatureFeelsLike { get; private init; }
+    public string Pressure { get; private init; }
+    public string Humidity { get; private init; }
+    public string WindSpeed { get; private init; }
+    public string Description { get; private init; }
 
     private const double hpa_INTO_mmHg = 0.750062;
 
@@ -19,7 +19,5 @@ public class WeatherData : IWeatherDataProvider
         Humidity = weather.Main.Humidity.ToString();
         WindSpeed = weather.Wind.Speed.ToString();
         Description = weather.Weather[0].Description;
-
-
     }
 }
