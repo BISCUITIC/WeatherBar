@@ -2,5 +2,5 @@
 
 public interface IWeatherResponseProvider
 {
-    Task<WeatherResponse?> TryGetWeatherResponse(double latitude, double longitude);
+    Task<WeatherResponse?> TryGetWeatherResponse(double latitude, double longitude, string language);
 }

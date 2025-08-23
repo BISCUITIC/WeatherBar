@@ -24,6 +24,7 @@ internal class UIComponents : IDisposable
     
     public CustomTextBox CityInput => _cityInput;
     public DataPanel WeatherDataPanel => _weatherDataPanel;
+    public TaskbarIcon TrayIcon => _trayIcon;
 
     public UIComponents(ILocalizationData languageLocalization, RoutedEventHandler exit, KeyEventHandler cityKeyPressHandler)
     {
@@ -63,7 +64,7 @@ internal class UIComponents : IDisposable
             Background = new SolidColorBrush(Color.FromArgb(225, 44, 44, 44)),
             BorderBrush = new SolidColorBrush(Color.FromArgb(0, 28, 28, 28)),
             CornerRadius = new CornerRadius(7),
-            Width = 225,
+            Width = 230,
             Child = _mainPanel,
         };
 

@@ -45,13 +45,13 @@ public class RequestHandler : ILocationResponseProvider, IWeatherResponseProvide
         }
     }
 
-    public async Task<WeatherResponse?> TryGetWeatherResponse(double latitude, double longitude)
+    public async Task<WeatherResponse?> TryGetWeatherResponse(double latitude, double longitude, string language)
     {
         try
         {
             _requestUrlBuilder.Clear();
             _requestUrlBuilder.AppendJoin("", WEATHER_URL, "lat=", latitude, "&lon=", longitude,
-                                          "&units=", WEATHER_METRIC, "&lang=", LANGUAGE, "&appid=", API_KEY);
+                                          "&units=", WEATHER_METRIC, "&lang=", language, "&appid=", API_KEY);
 
             string content = await GetResponse(_requestUrlBuilder.ToString());
             //string content = "{\"coord\":{\"lon\":31.0132,\"lat\":52.4239},\"weather\":[{\"id\":800,\"main\":\"Clear\",\"description\":\"ясно\",\"icon\":\"01n\"}],\"base\":\"stations\",\"main\":{\"temp\":16.98,\"feels_like\":17.03,\"temp_min\":14.9,\"temp_max\":16.98,\"pressure\":1013,\"humidity\":88,\"sea_level\":1013,\"grnd_level\":998},\"visibility\":7000,\"wind\":{\"speed\":3,\"deg\":240},\"clouds\":{\"all\":3},\"dt\":1754087577,\"sys\":{\"type\":1,\"id\":8933,\"country\":\"BY\",\"sunrise\":1754101054,\"sunset\":1754156805},\"timezone\":10800,\"id\":619762,\"name\":\"Якубовка\",\"cod\":200}\r\n";

@@ -2,6 +2,7 @@
 
 public abstract class LanguageLocalization: ILocalizationData
 {
+    public string Language {  get; private init; }
     public string Temperature { get; private init; }
     public string Pressure { get; private init; }
     public string Humidity { get; private init; }
@@ -17,6 +18,7 @@ public abstract class LanguageLocalization: ILocalizationData
 
         ILocalizationData localizationData = _localizationProvider.GetLocalization(language);
 
+        Language = language;
         Temperature = localizationData.Temperature;
         Pressure = localizationData.Pressure;
         Humidity = localizationData.Humidity;

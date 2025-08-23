@@ -29,7 +29,7 @@ public partial class App : Application
     public void Start(object sender, StartupEventArgs e)
     {
         _localizator = new LocalizationConfigHandler();
-        _localization = new FrLocalization(_localizator);        
+        _localization = new RuLocalization(_localizator);        
 
         _UI = new UIComponents(_localization, OnExitButton_Click, OnCityInputKey_Press);
 
@@ -65,7 +65,9 @@ public partial class App : Application
         if (locationResponse is not null)
         {
             ILocationDataProvider locationData = new LocationData(locationResponse);
-            WeatherResponse? weatherResponse = await _requestHandler.TryGetWeatherResponse(locationData.Latitude, locationData.Longitude);
+            WeatherResponse? weatherResponse = await _requestHandler.TryGetWeatherResponse(locationData.Latitude, 
+                                                                                           locationData.Longitude,
+                                                                                           _localization.Language);
             if (weatherResponse is not null)
             {
                 IWeatherDataProvider weatherData = new WeatherData(weatherResponse);
