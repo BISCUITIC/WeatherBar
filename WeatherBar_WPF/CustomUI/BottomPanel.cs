@@ -12,31 +12,17 @@ internal class BottomPanel : UserControl
     private readonly Button _settingButton;
     private readonly Button _exitButton;
 
-    public RoutedEventHandler? ExitButtonClick { get; set; }
-    public RoutedEventHandler? SettingButtonClick { get; set; }
-
     public BottomPanel(ILocalizationData localization,
                        FontFamily fontFamily,
                        double fontSize,
-                       Brush foreground)
+                       Brush foreground,
+                       RoutedEventHandler ExitButtonClick,
+                       RoutedEventHandler SettingButtonClick)
     {
-        _settingButton = new Button()
-        {
-            FontFamily = fontFamily,
-            FontSize = 12,
-            Foreground = foreground,
-            Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
-            BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)),
-            Width = 50,
-            Padding = new Thickness(2),
-            Margin = new Thickness(0, 7, 0, 3),
-            Content = "Settings",
-        };
-        _settingButton.Click += SettingButtonClick;
         _exitButton = new Button
         {
             FontFamily = fontFamily,
-            FontSize = 12,
+            FontSize = fontSize,
             Foreground = foreground,
             Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
             BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)),
@@ -46,6 +32,20 @@ internal class BottomPanel : UserControl
             Content = localization.Exit,               
         };
         _exitButton.Click += ExitButtonClick;
+
+        _settingButton = new Button()
+        {
+            FontFamily = fontFamily,
+            FontSize = fontSize,
+            Foreground = foreground,
+            Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
+            BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255)),
+            Width = 50,
+            Padding = new Thickness(2),
+            Margin = new Thickness(0, 7, 0, 3),
+            Content = "Settings",
+        };    
+        _settingButton.Click += SettingButtonClick;
 
         _layout = new StackPanel()
         {

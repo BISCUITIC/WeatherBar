@@ -29,11 +29,9 @@ public partial class App : Application
     public void Start(object sender, StartupEventArgs e)
     {
         _localizator = new LocalizationConfigHandler();
-        _localization = new RuLocalization(_localizator);        
+        _localization = new RuLocalization(_localizator);
 
-        _UI = new UIComponents(_localization);
-        _UI.ExitButtonClick = OnExitButton_Click;
-        _UI.CityInputKeyPress = OnCityInputKey_Press;
+        _UI = new UIComponents(_localization, OnExitButton_Click, OnSettingButton_Click, OnCityInputKey_Press);
 
         _requestHandler = new RequestHandler();
         _cityInputHandler = new CityConfigHandler();
@@ -42,6 +40,7 @@ public partial class App : Application
 
         Task.Run(UpdateLoop);
     }
+
 
     private async Task UpdateLoop()
     {
@@ -96,6 +95,9 @@ public partial class App : Application
     private void OnExitButton_Click(object sender, RoutedEventArgs e)
     {
         Close();
+    }
+    private void OnSettingButton_Click(object sender, RoutedEventArgs e)
+    {        
     }
     private void OnCityInputKey_Press(object? sender, KeyEventArgs e)
     {

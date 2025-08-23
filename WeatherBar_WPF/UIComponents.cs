@@ -12,7 +12,7 @@ namespace WeatherBar_WPF;
 
 internal class UIComponents : IDisposable
 {
-    private ILocalizationData _localization;
+    private readonly ILocalizationData _localization;
 
     private readonly TaskbarIcon _trayIcon;
 
@@ -25,36 +25,32 @@ internal class UIComponents : IDisposable
 
     public  CustomTextBox CityInput => _cityInput;
     public DataPanel WeatherDataPanel => _weatherDataPanel;
-    public TaskbarIcon TrayIcon => _trayIcon;
+    public TaskbarIcon TrayIcon => _trayIcon;   
 
-    public RoutedEventHandler? ExitButtonClick { get; set; }
-    public RoutedEventHandler? SettingButtonClick { get; set; }
-    public KeyEventHandler? CityInputKeyPress { get; set; }
-
-    public UIComponents(ILocalizationData languageLocalization)
+    public UIComponents(ILocalizationData languageLocalization, 
+                        RoutedEventHandler ExitButtonClick,
+                        RoutedEventHandler SettingButtonClick,
+                        KeyEventHandler CityInputKeyPress)
     {
         _localization = languageLocalization;
 
-        FontFamily fontFamily = new FontFamily("Segoe UI");
-        double fontSize = 16;
+        FontFamily fontFamily = new FontFamily("Segoe UI");        
         Brush foreground = new SolidColorBrush(Colors.White);
 
         _cityInput = new CustomTextBox()
         {
             FontFamily = fontFamily,
-            FontSize = fontSize,
+            FontSize = 16,
             Foreground = foreground,
             Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
             BorderBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
             HorizontalAlignment = HorizontalAlignment.Stretch,
-        };
+        };        
         _cityInput.KeyDown += CityInputKeyPress;
 
-        _weatherDataPanel = new DataPanel(_localization, fontFamily, fontSize, foreground);
+        _weatherDataPanel = new DataPanel(_localization, fontFamily, 16, foreground);
 
-        _bottomPanel = new BottomPanel(_localization, fontFamily, fontSize, foreground);
-        _bottomPanel.ExitButtonClick += ExitButtonClick;
-        _bottomPanel.SettingButtonClick += SettingButtonClick;
+        _bottomPanel = new BottomPanel(_localization, fontFamily, 12, foreground,  ExitButtonClick, SettingButtonClick);       
 
         _mainPanel = new StackPanel()
         {
