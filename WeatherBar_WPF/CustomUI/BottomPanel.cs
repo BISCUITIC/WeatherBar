@@ -12,7 +12,8 @@ internal class BottomPanel : UserControl
     private readonly Button _settingButton;
     private readonly Button _exitButton;
 
-    public RoutedEventHandler ExitButtonClick { get; set; }
+    public RoutedEventHandler? ExitButtonClick { get; set; }
+    public RoutedEventHandler? SettingButtonClick { get; set; }
 
     public BottomPanel(ILocalizationData localization,
                        FontFamily fontFamily,
@@ -31,6 +32,7 @@ internal class BottomPanel : UserControl
             Margin = new Thickness(0, 7, 0, 3),
             Content = "Settings",
         };
+        _settingButton.Click += SettingButtonClick;
         _exitButton = new Button
         {
             FontFamily = fontFamily,
@@ -43,7 +45,6 @@ internal class BottomPanel : UserControl
             Margin = new Thickness(0, 7, 0, 3),
             Content = localization.Exit,               
         };
-
         _exitButton.Click += ExitButtonClick;
 
         _layout = new StackPanel()

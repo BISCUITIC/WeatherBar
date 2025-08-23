@@ -1,5 +1,6 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
 using Localization;
+//using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,30 +14,27 @@ internal class UIComponents : IDisposable
 {
     private ILocalizationData _localization;
 
-    private TaskbarIcon _trayIcon;
+    private readonly TaskbarIcon _trayIcon;
 
-    private Border _trayLayout;
-    private StackPanel _mainPanel;
+    private readonly Border _trayLayout;
+    private readonly StackPanel _mainPanel;
 
-    private CustomTextBox _cityInput;
-    private DataPanel _weatherDataPanel;
-    private BottomPanel _bottomPanel;
+    private readonly CustomTextBox _cityInput;
+    private readonly DataPanel _weatherDataPanel;
+    private readonly BottomPanel _bottomPanel;
 
-    public CustomTextBox CityInput => _cityInput;
+    public  CustomTextBox CityInput => _cityInput;
     public DataPanel WeatherDataPanel => _weatherDataPanel;
     public TaskbarIcon TrayIcon => _trayIcon;
 
-    public RoutedEventHandler ExitButtonClick { get; set; }
-    public KeyEventHandler CityInputKeyPress { get; set; }
+    public RoutedEventHandler? ExitButtonClick { get; set; }
+    public RoutedEventHandler? SettingButtonClick { get; set; }
+    public KeyEventHandler? CityInputKeyPress { get; set; }
 
     public UIComponents(ILocalizationData languageLocalization)
     {
         _localization = languageLocalization;
-        InitComponents();                
-    }
 
-    private void InitComponents()
-    {
         FontFamily fontFamily = new FontFamily("Segoe UI");
         double fontSize = 16;
         Brush foreground = new SolidColorBrush(Colors.White);
@@ -54,13 +52,14 @@ internal class UIComponents : IDisposable
 
         _weatherDataPanel = new DataPanel(_localization, fontFamily, fontSize, foreground);
 
-        _bottomPanel = new BottomPanel(_localization, fontFamily, fontSize, foreground);       
+        _bottomPanel = new BottomPanel(_localization, fontFamily, fontSize, foreground);
         _bottomPanel.ExitButtonClick += ExitButtonClick;
+        _bottomPanel.SettingButtonClick += SettingButtonClick;
 
         _mainPanel = new StackPanel()
         {
             Margin = new Thickness(5),
-            Children = { _cityInput, _weatherDataPanel, _bottomPanel},
+            Children = { _cityInput, _weatherDataPanel, _bottomPanel },
         };
 
         _trayLayout = new Border
