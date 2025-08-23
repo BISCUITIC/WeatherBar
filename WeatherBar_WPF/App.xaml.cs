@@ -31,7 +31,9 @@ public partial class App : Application
         _localizator = new LocalizationConfigHandler();
         _localization = new RuLocalization(_localizator);        
 
-        _UI = new UIComponents(_localization, OnExitButton_Click, OnCityInputKey_Press);
+        _UI = new UIComponents(_localization);
+        _UI.ExitButtonClick = OnExitButton_Click;
+        _UI.CityInputKeyPress = OnCityInputKey_Press;
 
         _requestHandler = new RequestHandler();
         _cityInputHandler = new CityConfigHandler();

@@ -21,19 +21,21 @@ internal class UIComponents : IDisposable
     private CustomTextBox _cityInput;
     private DataPanel _weatherDataPanel;
     private BottomPanel _bottomPanel;
-    
+
     public CustomTextBox CityInput => _cityInput;
     public DataPanel WeatherDataPanel => _weatherDataPanel;
     public TaskbarIcon TrayIcon => _trayIcon;
 
-    public UIComponents(ILocalizationData languageLocalization, RoutedEventHandler exit, KeyEventHandler cityKeyPressHandler)
+    public RoutedEventHandler ExitButtonClick { get; set; }
+    public KeyEventHandler CityInputKeyPress { get; set; }
+
+    public UIComponents(ILocalizationData languageLocalization)
     {
         _localization = languageLocalization;
-        InitComponents(exit);        
-        _cityInput.KeyDown += cityKeyPressHandler;
+        InitComponents();                
     }
 
-    private void InitComponents(RoutedEventHandler exit)
+    private void InitComponents()
     {
         FontFamily fontFamily = new FontFamily("Segoe UI");
         double fontSize = 16;
@@ -48,10 +50,12 @@ internal class UIComponents : IDisposable
             BorderBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0)),
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
+        _cityInput.KeyDown += CityInputKeyPress;
 
         _weatherDataPanel = new DataPanel(_localization, fontFamily, fontSize, foreground);
 
-        _bottomPanel = new BottomPanel(_localization, fontFamily, fontSize, foreground, exit);       
+        _bottomPanel = new BottomPanel(_localization, fontFamily, fontSize, foreground);       
+        _bottomPanel.ExitButtonClick += ExitButtonClick;
 
         _mainPanel = new StackPanel()
         {
