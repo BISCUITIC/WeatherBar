@@ -7,14 +7,18 @@ namespace WeatherBar_WPF.CustomUI;
 internal class CustomLabel : Label
 {
     private string _data;
-    private readonly string? _prefix;
-    private readonly string? _postfix;
+    private string? _prefix;
+    private string? _postfix;
 
     private readonly StringBuilder _contentBuilder;
 
     private readonly TextBlock _textBlock;
 
     public string Data { get => _data; set => ChangeData(value); }
+    public string Prefix 
+    {
+        set { _prefix = value; ChangeData(); }
+    }
 
     public CustomLabel(string data, string? prefix, string? postfix) : base()
     {
@@ -32,6 +36,13 @@ internal class CustomLabel : Label
     {
         _data = value;
 
+        _contentBuilder.Clear();
+        _contentBuilder.Append(_prefix).Append(_data).Append(_postfix);
+        _textBlock.Text = _contentBuilder.ToString();
+    }
+
+    private void ChangeData()
+    {
         _contentBuilder.Clear();
         _contentBuilder.Append(_prefix).Append(_data).Append(_postfix);
         _textBlock.Text = _contentBuilder.ToString();

@@ -6,7 +6,7 @@ namespace WeatherBar_WPF.CustomUI;
 
 internal class DataPanel : UserControl
 {
-    private readonly ILocalizationData _localization;
+    private ILocalizationData _localization;
 
     private readonly StackPanel _layout;
 
@@ -69,5 +69,15 @@ internal class DataPanel : UserControl
         };
 
         Content = _layout;
+    }
+
+    public void UpdateLocalization(ILocalizationData localization)
+    {
+        _localization = localization;
+        _temperature.Prefix = $"{_localization.Temperature} : ";
+        _pressure.Prefix = $"{_localization.Pressure} : ";
+        _humidity.Prefix = $"{_localization.Humidity} : ";
+        _windSpeed.Prefix = $"{_localization.WindSpeed} : ";
+        _description.Prefix = $"{_localization.Description} : ";
     }
 }

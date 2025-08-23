@@ -10,7 +10,7 @@ internal class WeatherError : UIState
     {
         _location = locationDataProvider;
     }
-    public override void Apply(UIComponents ui)
+    public override void Apply(MainPanel ui)
     {
         ui.CityInput.State = "Couldn't get a weather";
         ui.CityInput.Text = _location.Name + ", " + _location.Country;

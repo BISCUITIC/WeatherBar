@@ -16,7 +16,7 @@ internal class Succesfull : UIState
         _iconProvider = iconProvider;
     }
 
-    public override void Apply(UIComponents ui)
+    public override void Apply(MainPanel ui)
     {
         ui.CityInput.Text = _location.Name + ", " + _location.Country;
         ui.CityInput.LastUpdateTime = DateTime.Now.ToShortTimeString();

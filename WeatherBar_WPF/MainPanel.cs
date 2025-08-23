@@ -10,24 +10,25 @@ using WeatherBar_WPF.UIStates;
 
 namespace WeatherBar_WPF;
 
-internal class UIComponents : IDisposable
+internal class MainPanel : IDisposable
 {
     private readonly ILocalizationData _localization;
 
     private readonly TaskbarIcon _trayIcon;
 
-    private readonly Border _trayLayout;
-    private readonly StackPanel _mainPanel;
+    private readonly Border _wrapper;
+    private readonly StackPanel _layout;
 
     private readonly CustomTextBox _cityInput;
     private readonly DataPanel _weatherDataPanel;
-    private readonly BottomPanel _bottomPanel;
+    private readonly BottomPanel _bottomPanel;    
 
-    public  CustomTextBox CityInput => _cityInput;
+    public CustomTextBox CityInput => _cityInput;
     public DataPanel WeatherDataPanel => _weatherDataPanel;
-    public TaskbarIcon TrayIcon => _trayIcon;   
+    public TaskbarIcon TrayIcon => _trayIcon;     
+    public StackPanel Layout => _layout;
 
-    public UIComponents(ILocalizationData languageLocalization, 
+    public MainPanel(ILocalizationData languageLocalization, 
                         RoutedEventHandler ExitButtonClick,
                         RoutedEventHandler SettingButtonClick,
                         KeyEventHandler CityInputKeyPress)
@@ -52,25 +53,25 @@ internal class UIComponents : IDisposable
 
         _bottomPanel = new BottomPanel(_localization, fontFamily, 12, foreground,  ExitButtonClick, SettingButtonClick);       
 
-        _mainPanel = new StackPanel()
+        _layout = new StackPanel()
         {
             Margin = new Thickness(5),
             Children = { _cityInput, _weatherDataPanel, _bottomPanel },
         };
 
-        _trayLayout = new Border
+        _wrapper = new Border
         {
             Background = new SolidColorBrush(Color.FromArgb(225, 44, 44, 44)),
             BorderBrush = new SolidColorBrush(Color.FromArgb(0, 28, 28, 28)),
             CornerRadius = new CornerRadius(7),
             Width = 230,
-            Child = _mainPanel,
-        };
+            Child = _layout,
+        };        
 
         _trayIcon = new TaskbarIcon
         {
             Icon = System.Drawing.SystemIcons.Information,
-            TrayPopup = _trayLayout,
+            TrayPopup = _wrapper,
             PopupActivation = PopupActivationMode.LeftOrRightClick,
             ToolTipText = "Weather Bar",
         };
@@ -79,6 +80,12 @@ internal class UIComponents : IDisposable
     public void Update(UIState state)
     {
         state.Apply(this);
+    }
+
+    public void UpdateLocalization(ILocalizationData localization)
+    {
+        _weatherDataPanel.UpdateLocalization(localization);
+        _bottomPanel.UpdateLocalization(localization);
     }
 
     public void Dispose()

@@ -7,7 +7,7 @@ internal class LocationError : UIState
     {
         _city = city;
     }
-    public override void Apply(UIComponents ui)
+    public override void Apply(MainPanel ui)
     {
         ui.CityInput.State = "Couldn't get a city";
         ui.CityInput.Text = _city;

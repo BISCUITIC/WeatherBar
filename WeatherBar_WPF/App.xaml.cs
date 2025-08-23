@@ -4,6 +4,8 @@ using ConfigHandler;
 using Localization;
 using Localization.Localizations;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using WeatherBar_WPF.CustomUI;
 using WeatherBar_WPF.UIStates;
@@ -17,8 +19,10 @@ namespace WeatherBar_WPF;
 /// </summary>
 public partial class App : Application
 {
-    private UIComponents _UI;
+    private MainPanel _mainPanel;
     private UIState _UIstate;
+
+    private SettingsPanel _settingsPanel;
 
     private RequestHandler _requestHandler;
     private ICityInputHandler _cityInputHandler;
@@ -30,8 +34,13 @@ public partial class App : Application
     {
         _localizator = new LocalizationConfigHandler();
         _localization = new RuLocalization(_localizator);
-
-        _UI = new UIComponents(_localization, OnExitButton_Click, OnSettingButton_Click, OnCityInputKey_Press);
+        
+        _mainPanel = new MainPanel(_localization, OnExitButton_Click, OnSettingButton_Click, OnCityInputKey_Press);
+        _settingsPanel = new SettingsPanel()
+        {
+            PlacementTarget = _mainPanel.Layout,
+        };
+        _settingsPanel.ChangeLanguage += OnChangeLanguage;
 
         _requestHandler = new RequestHandler();
         _cityInputHandler = new CityConfigHandler();
@@ -40,7 +49,6 @@ public partial class App : Application
 
         Task.Run(UpdateLoop);
     }
-
 
     private async Task UpdateLoop()
     {
@@ -55,7 +63,7 @@ public partial class App : Application
     {
         Current.Dispatcher.Invoke(() =>
         {
-            _UI.Update(state);
+            _mainPanel.Update(state);
         });
     }
 
@@ -97,7 +105,34 @@ public partial class App : Application
         Close();
     }
     private void OnSettingButton_Click(object sender, RoutedEventArgs e)
-    {        
+    {
+        //var popup = new Popup
+        //{            
+        //    Placement = PlacementMode.Relative,
+        //    PlacementTarget = _UI.TrayLayout,
+        //    //HorizontalOffset = SystemParameters.WorkArea.Width - 50,
+        //    HorizontalOffset = - 50,
+        //    VerticalOffset = 0,
+        //    Width = 50,            
+        //    StaysOpen = false,
+        //    Child = new Border
+        //    {
+        //         Background = System.Windows.Media.Brushes.White,
+        //         BorderBrush = System.Windows.Media.Brushes.Gray,
+        //         BorderThickness = new Thickness(1),
+        //         Child = new StackPanel
+        //         {
+        //             Children =
+        //                {                            
+        //                    new Button { Content = "en" },
+        //                    new Button { Content = "ru" },
+        //                    new Button { Content = "fr" }
+        //                }
+        //         }
+        //     }
+        // };        
+        //popup.IsOpen = true;
+        _settingsPanel.IsOpen = true;
     }
     private void OnCityInputKey_Press(object? sender, KeyEventArgs e)
     {
@@ -108,10 +143,15 @@ public partial class App : Application
             _cityInputHandler.SaveLastCity(textBox.Text);
         }
     }
+    private void OnChangeLanguage(string language)
+    {
+        _localization = new LanguageLocalization(language, _localizator);
+        _mainPanel.UpdateLocalization(_localization);
+    }
 
     private void Close()
     {
-        _UI.Dispose();
+        _mainPanel.Dispose();
         Shutdown();
     }
 }

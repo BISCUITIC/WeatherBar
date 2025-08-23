@@ -2,5 +2,5 @@
 
 internal abstract class UIState
 {
-    public abstract void Apply(UIComponents ui);
+    public abstract void Apply(MainPanel ui);
 }

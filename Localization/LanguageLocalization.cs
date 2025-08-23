@@ -1,6 +1,6 @@
 ﻿namespace Localization;
 
-public abstract class LanguageLocalization: ILocalizationData
+public class LanguageLocalization: ILocalizationData
 {
     public string Language {  get; private init; }
     public string Temperature { get; private init; }
