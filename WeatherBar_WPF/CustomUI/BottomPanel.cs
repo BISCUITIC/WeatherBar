@@ -9,8 +9,11 @@ internal class BottomPanel : UserControl
 {
     private readonly Grid _layout;
 
-    private readonly Button _settingButton;
+    private readonly Button _settingsButton;
     private readonly Button _exitButton;
+
+    public Button SettingsButton => _settingsButton;
+    public Button ExitButton => _exitButton;
 
     public BottomPanel(ILocalizationData localization,
                        FontFamily fontFamily,
@@ -31,7 +34,7 @@ internal class BottomPanel : UserControl
         };
         _exitButton.Click += ExitButtonClick;
      
-        _settingButton = new Button()
+        _settingsButton = new Button()
         {
             FontFamily = fontFamily,
             FontSize = fontSize,
@@ -40,11 +43,11 @@ internal class BottomPanel : UserControl
             BorderBrush = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255)),            
             Content = (localization as LanguageLocalization)?.Language,                
         };    
-        _settingButton.Click += SettingButtonClick;
+        _settingsButton.Click += SettingButtonClick;
 
         _layout = new Grid()
         {
-            Children = { _exitButton, _settingButton },
+            Children = { _exitButton, _settingsButton },
             Margin = new Thickness(5),        
         };
         _layout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
@@ -55,15 +58,9 @@ internal class BottomPanel : UserControl
         Grid.SetColumn(_exitButton, 1);
         Grid.SetRow(_exitButton, 0);
 
-        Grid.SetColumn(_settingButton, 2);
-        Grid.SetRow(_settingButton, 0);  
+        Grid.SetColumn(_settingsButton, 2);
+        Grid.SetRow(_settingsButton, 0);  
 
         Content = _layout;
-    }
-
-    public void UpdateLocalization(ILocalizationData localization)
-    {
-        _exitButton.Content = localization.Exit;
-        _settingButton.Content = (localization as LanguageLocalization)?.Language;
     }
 }

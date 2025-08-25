@@ -6,8 +6,6 @@ namespace WeatherBar_WPF.CustomUI;
 
 internal class DataPanel : UserControl
 {
-    private ILocalizationData _localization;
-
     private readonly StackPanel _layout;
 
     private readonly CustomLabel _temperature;
@@ -24,38 +22,36 @@ internal class DataPanel : UserControl
     public CustomLabel WindSpeed => _windSpeed;
     public CustomLabel Description => _description;
 
-    public DataPanel(ILocalizationData languageLocalization,
+    public DataPanel(ILocalizationData localization,
                      System.Windows.Media.FontFamily fontFamily,
                      double fontSize,
                      System.Windows.Media.Brush foreground)
     {
-        _localization = languageLocalization;
-
-        _temperature = new CustomLabel(0.ToString(), $"{_localization.Temperature} : ", " °C")
+        _temperature = new CustomLabel(0.ToString(), $"{localization.Temperature} : ", " °C")
         {
             FontFamily = fontFamily,
             FontSize = fontSize,
             Foreground = foreground,
         };
-        _pressure = new CustomLabel(0.ToString(), $"{_localization.Pressure} : ", " mm Hg")
+        _pressure = new CustomLabel(0.ToString(), $"{localization.Pressure} : ", " mm Hg")
         {
             FontFamily = fontFamily,
             FontSize = fontSize,
             Foreground = foreground,
         };
-        _humidity = new CustomLabel(0.ToString(), $"{_localization.Humidity} : ", " %")
+        _humidity = new CustomLabel(0.ToString(), $"{localization.Humidity} : ", " %")
         {
             FontFamily = fontFamily,
             FontSize = fontSize,
             Foreground = foreground,
         };
-        _windSpeed = new CustomLabel(0.ToString(), $"{_localization.WindSpeed} : ", " m/s")
+        _windSpeed = new CustomLabel(0.ToString(), $"{localization.WindSpeed} : ", " m/s")
         {
             FontFamily = fontFamily,
             FontSize = fontSize,
             Foreground = foreground,
         };
-        _description = new CustomLabel(0.ToString(), $"{_localization.Description} : ", null)
+        _description = new CustomLabel(0.ToString(), $"{localization.Description} : ", null)
         {
             FontFamily = fontFamily,
             FontSize = fontSize,
@@ -69,15 +65,5 @@ internal class DataPanel : UserControl
         };
 
         Content = _layout;
-    }
-
-    public void UpdateLocalization(ILocalizationData localization)
-    {
-        _localization = localization;
-        _temperature.Prefix = $"{_localization.Temperature} : ";
-        _pressure.Prefix = $"{_localization.Pressure} : ";
-        _humidity.Prefix = $"{_localization.Humidity} : ";
-        _windSpeed.Prefix = $"{_localization.WindSpeed} : ";
-        _description.Prefix = $"{_localization.Description} : ";
-    }
+    }   
 }

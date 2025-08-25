@@ -25,6 +25,7 @@ internal class MainPanel : IDisposable
 
     public CustomTextBox CityInput => _cityInput;
     public DataPanel WeatherDataPanel => _weatherDataPanel;
+    public BottomPanel BottomPanel => _bottomPanel;
     public TaskbarIcon TrayIcon => _trayIcon;     
     public StackPanel Layout => _layout;
 
@@ -80,12 +81,6 @@ internal class MainPanel : IDisposable
     public void Update(UIState state)
     {
         state.Apply(this);
-    }
-
-    public void UpdateLocalization(ILocalizationData localization)
-    {
-        _weatherDataPanel.UpdateLocalization(localization);
-        _bottomPanel.UpdateLocalization(localization);
     }
 
     public void Dispose()

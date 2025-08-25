@@ -9,6 +9,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using WeatherBar_WPF.CustomUI;
 using WeatherBar_WPF.UIStates;
+using WeatherBar_WPF.UIStates.States;
 using WeatherIconGenerator;
 using WinForm = System.Windows.Forms;
 
@@ -47,7 +48,7 @@ public partial class App : Application
             PlacementTarget = _mainPanel.Layout,
         };
 
-        _settingsPanel.ChangeLanguage += OnChangeLanguage;
+        _settingsPanel.ChangeLanguage += async (string language) => { await OnChangeLanguage(language); };
         _cityInputHandler.OnCityChange += async () => { await SearchForNewCity(); };
 
         Task.Run(UpdateLoop);
@@ -146,11 +147,14 @@ public partial class App : Application
             _cityInputHandler.SaveLastCity(textBox.Text);
         }
     }
-    private void OnChangeLanguage(string language)
+    private async Task OnChangeLanguage(string language)
     {
         _localizationHandler.SaveLastLocalization(language);
         _localization = new LanguageLocalization(language, _localizator);
-        _mainPanel.UpdateLocalization(_localization);
+
+        _UIstate = new LocalizationUpdate(_localization);
+        await UpdateUI(_UIstate);
+        await UpdateData(_cityInputHandler.GetLastCity());
     }
 
     private void Close()
