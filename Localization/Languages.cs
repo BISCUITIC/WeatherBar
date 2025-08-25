@@ -1,12 +1,10 @@
-﻿using System.Collections;
-
-namespace Localization;
+﻿namespace Localization;
 
 public static class Languages
 {
-    public static string RU => "ru";
-    public static string EN => "en";
-    public static string FR => "fr";
+    public const string RU = "ru";
+    public const string EN = "en";
+    public const string FR = "fr";
 
-    public static IEnumerable<string> Data => [ "en", "ru", "fr" ];
+    public static IEnumerable<string> Data => [RU, EN, FR];
 }

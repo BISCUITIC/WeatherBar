@@ -4,13 +4,14 @@ namespace ConfigHandler;
 
 public class LocalizationConfigHandler : ILocalizationHandler
 {
-    private const string _path = "localization_config..txt";    
+    private const string _path = "localization_config..txt";
+    private const string _defaultLanguage = Languages.EN;
 
     public event Action? OnLocalizationChange;
 
     public LocalizationConfigHandler()
     {
-        if (!File.Exists(_path)) { File.WriteAllText(_path, Languages.EN); }
+        if (!File.Exists(_path)) { File.WriteAllText(_path, _defaultLanguage); }
     }
 
     public string GetLastLocalization()
