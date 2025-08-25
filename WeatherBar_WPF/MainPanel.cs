@@ -61,7 +61,7 @@ internal class MainPanel : IDisposable
 
         _wrapper = new Border
         {
-            Background = new SolidColorBrush(Color.FromArgb(225, 44, 44, 44)),
+            Background = new SolidColorBrush(Color.FromArgb(235, 44, 44, 44)),
             BorderBrush = new SolidColorBrush(Color.FromArgb(0, 28, 28, 28)),
             CornerRadius = new CornerRadius(7),
             Width = 230,

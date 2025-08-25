@@ -63,6 +63,7 @@ internal class BottomPanel : UserControl
 
     public void UpdateLocalization(ILocalizationData localization)
     {
-        _exitButton.Content = localization.Exit;   
+        _exitButton.Content = localization.Exit;
+        _settingButton.Content = (localization as LanguageLocalization)?.Language;
     }
 }

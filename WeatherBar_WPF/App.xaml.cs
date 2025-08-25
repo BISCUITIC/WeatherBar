@@ -25,26 +25,29 @@ public partial class App : Application
     private SettingsPanel _settingsPanel;
 
     private RequestHandler _requestHandler;
+
     private ICityInputHandler _cityInputHandler;
+    private ILocalizationHandler _localizationHandler;
 
     private LanguageLocalization _localization;
     private ILocalizationProvider _localizator;
 
     public void Start(object sender, StartupEventArgs e)
     {
-        _localizator = new LocalizationConfigHandler();
-        _localization = new RuLocalization(_localizator);
+        _requestHandler = new RequestHandler();
+        _cityInputHandler = new CityConfigHandler();
+        _localizationHandler = new LocalizationConfigHandler();
+
+        _localizator = new LocalizationJsonHandler();
+        _localization = new LanguageLocalization(_localizationHandler.GetLastLocalization(), _localizator);
         
         _mainPanel = new MainPanel(_localization, OnExitButton_Click, OnSettingButton_Click, OnCityInputKey_Press);
         _settingsPanel = new SettingsPanel()
         {
             PlacementTarget = _mainPanel.Layout,
         };
+
         _settingsPanel.ChangeLanguage += OnChangeLanguage;
-
-        _requestHandler = new RequestHandler();
-        _cityInputHandler = new CityConfigHandler();
-
         _cityInputHandler.OnCityChange += async () => { await SearchForNewCity(); };
 
         Task.Run(UpdateLoop);
@@ -145,6 +148,7 @@ public partial class App : Application
     }
     private void OnChangeLanguage(string language)
     {
+        _localizationHandler.SaveLastLocalization(language);
         _localization = new LanguageLocalization(language, _localizator);
         _mainPanel.UpdateLocalization(_localization);
     }

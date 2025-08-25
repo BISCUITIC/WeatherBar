@@ -2,11 +2,11 @@
 
 namespace Localization;
 
-public class LocalizationConfigHandler : ILocalizationProvider
+public class LocalizationJsonHandler : ILocalizationProvider
 {
     private const string PATH_LOCALZATION_CONFIGS = "localization";
 
-    public LocalizationConfigHandler() { }
+    public LocalizationJsonHandler() { }
 
     public ILocalizationData GetLocalization(string language)
     {

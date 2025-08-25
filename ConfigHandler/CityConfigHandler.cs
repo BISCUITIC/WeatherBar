@@ -2,7 +2,7 @@
 
 public class CityConfigHandler : ICityInputHandler
 {
-    private const string _path = "config.txt";
+    private const string _path = "city_config.txt";
     private const string _defaultСity = "Minsk";
 
     public event Action? OnCityChange;
