@@ -33,22 +33,6 @@ public partial class App : Application
     private LanguageLocalization _localization;
     private ILocalizationProvider _localizator;
 
-    //public App()
-    //{
-    //    //AppDomain.CurrentDomain.UnhandledException += (s, e) =>
-    //    //{
-    //    //    MessageBox.Show(((Exception)e.ExceptionObject).ToString(), "Unhandled Exception");
-    //    //};
-
-    //    //DispatcherUnhandledException += (s, e) =>
-    //    //{
-    //    //    MessageBox.Show(e.Exception.ToString(), "Dispatcher Exception");
-    //    //    e.Handled = true;
-    //    //};
-
-    //    Startup += Start; // привязываем твой метод Start к событию старта приложения
-    //}
-
     public void Start(object sender, StartupEventArgs e)
     {
         _requestHandler = new RequestHandler();
