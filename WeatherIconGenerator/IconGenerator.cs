@@ -46,13 +46,13 @@ public class IconGenerator : IIconProvider
 
         if (IsTwoDigit(value))
         {
-            DrawSymbols(new PointF(9  * _scale, -3 * _scale), 
+            DrawSymbols(new PointF(15  * _scale, -3 * _scale), 
                         new PointF(-2 * _scale, -7 * _scale), 
-                        new PointF(-3 * _scale,  1 * _scale));
+                        new PointF(-5 * _scale,  1 * _scale));
         }
         else
         {
-            DrawSymbols(new PointF(9  * _scale, -3 * _scale), 
+            DrawSymbols(new PointF(15 * _scale, -3 * _scale), 
                         new PointF(-2 * _scale, 1  * _scale), 
                         new PointF(3  * _scale, 1  * _scale));
         }
@@ -60,7 +60,7 @@ public class IconGenerator : IIconProvider
         return _bitmap;
     }
 
-    private bool IsTwoDigit(int value) => Math.Abs(value) > 10;
+    private bool IsTwoDigit(int value) => Math.Abs(value) >= 10;
     private bool IsMoreTwoDigit(int value) => Math.Abs(value) > 99;
     private void DrawSymbols(PointF сelsiusSymbolPosition, PointF minusSymbolPosition, PointF valuePosition)
     {
